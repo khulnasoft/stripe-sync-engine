@@ -2,8 +2,6 @@
 
 Continuously synchronizes a Stripe account to a Postgres database.
 
-![Sync Stripe with Postgres](./docs/stripe-sync-engine.jpg)
-
 ## Motivation
 
 Sometimes you want to analyze your billing data using SQL. Even more importantly, you want to join your billing data to your product/business data.
