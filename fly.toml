@@ -33,6 +33,6 @@ kill_timeout = 5
   NODE_ENV="production"
   LOG_LEVEL = "debug"
   PORT = "8080"
-  AUTH0_CLIENT_ID="UwuDuHkLYALBkqCvQneHo9UDyrJ1WN7j"
+  AUTH0_CLIENT_ID="vgNvt58W9H5gdWalVqw8sxqJBivOmPca"
   AUTH0_DOMAIN="khulnasoft-dev.auth0.com"
 
