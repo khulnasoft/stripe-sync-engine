@@ -20,14 +20,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/cache@v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
@@ -43,39 +41,18 @@ jobs:
           echo SCHEMA=stripe >> .env
           echo PORT=8080 >> .env
           echo API_KEY=api_key_test >> .env
-
       - name: Install dependencies
         run: |
           npm ci
-
       - name: Prettier checks
         run: |
           npm run prettier:check
-
       - name: ESLint checks
         run: |
           npm run eslint:check
-
       - name: Builds successfully
         run: |
           npm run build
-
-      - name: Remove conflicting containerd
-        run: |
-          sudo apt-get remove -y containerd
-
-      - name: Install Docker
-        run: |
-          curl -fsSL https://get.docker.com | sh
-
-      # Properly Install Docker Compose
-      - name: Install Docker Compose
-        run: |
-          DOCKER_COMPOSE_VERSION=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | jq -r .tag_name)
-          sudo curl -L "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-          sudo chmod +x /usr/local/bin/docker-compose
-          docker-compose --version  # Check that docker-compose is correctly installed
-
       - name: Tests
         run: |
           docker-compose -f ./docker/compose.yml up -d
